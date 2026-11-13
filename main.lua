@@ -1,40 +1,68 @@
-local G=(type(getgenv)=="function"and getgenv())or _G pcall(function()if G.Sony and G.Sony.ui then G.Sony.ui:Destroy()end end)local S={}G.Sony=S local P=game:GetService("Players").LocalPlayer local R=game:GetService("RunService") local T=game:GetService("TweenService") local U=game:GetService("UserInputService") local ST=tick()
-S.A=Color3.fromRGB(255,255,255) S.D=Color3.fromRGB(220,230,240)
-S.C=function(o,r)local c=Instance.new("UICorner",o)c.CornerRadius=UDim.new(0,r or 6)end
-S.L=function(p,t,x,y,w,h,s,c,b,a)local q=Instance.new("TextLabel",p)q.Size=UDim2.new(0,w,0,h)q.Position=UDim2.new(0,x,0,y)q.BackgroundTransparency=1 q.Text=tostring(t)q.TextColor3=c or S.A q.Font=b and Enum.Font.GothamBold or Enum.Font.Gotham q.TextSize=s or 11 q.TextXAlignment=a or Enum.TextXAlignment.Left q.ZIndex=6 q.TextStrokeTransparency=0 q.TextStrokeColor3=Color3.fromRGB(0,0,0) return q end
-S.B=function(p,t,x,y,w,h,f)local b=Instance.new("TextButton",p)b.Size=UDim2.new(0,w,0,h)b.Position=UDim2.new(0,x,0,y)b.BackgroundColor3=Color3.fromRGB(40,45,55) b.BackgroundTransparency=0.5 b.Text=tostring(t)b.TextColor3=S.A b.Font=Enum.Font.GothamBold b.TextSize=11 b.ZIndex=20 S.C(b,6) b.TextStrokeTransparency=0 local s=Instance.new("UIStroke",b) s.Color=Color3.fromRGB(200,220,240) s.Transparency=0.6 b.MouseButton1Click:Connect(function()pcall(f)end)return b end
-local ui=Instance.new("ScreenGui")S.ui=ui ui.Name="LJ_UI"ui.ResetOnSpawn=false ui.IgnoreGuiInset=true ui.DisplayOrder=9999 pcall(function()if gethui then ui.Parent=gethui()end end)if not ui.Parent then ui.Parent=P:WaitForChild("PlayerGui")end
-local m=Instance.new("Frame",ui)S.main=m m.Size=UDim2.new(0,620,0,384)m.Position=UDim2.new(0.5,0,0.5,0)m.AnchorPoint=Vector2.new(0.5,0.5)m.BackgroundTransparency=1 m.BorderSizePixel=0 m.Active=true S.C(m,12)
-local st=Instance.new("UIStroke",m)st.Color=S.A st.Thickness=1.5 st.Transparency=0.3
-S.w=Instance.new("ImageLabel",m)S.w.Size=UDim2.new(0,620,0,384)S.w.BackgroundTransparency=1 S.w.ScaleType=Enum.ScaleType.Crop S.w.ImageTransparency=0 S.w.ZIndex=0
-task.spawn(function()pcall(function()local r=game:HttpGet("https://i.ibb.co/fLyCcpN/Image-1794403319705-539.jpg")if writefile and getcustomasset then writefile("lj_bg.png",r)S.w.Image=getcustomasset("lj_bg.png")end end)end)
-local tp=Instance.new("Frame",m)tp.Size=UDim2.new(0,620,0,48)tp.BackgroundTransparency=1 tp.BorderSizePixel=0 tp.ZIndex=10 
-S.L(tp,"李佳",16,6,140,22,18,S.A,true).ZIndex=14 S.L(tp,"2.0  /  SONIC CENTER",16,28,220,14,10,S.D).ZIndex=14 S.B(tp,"×",574,11,32,26,function()ui:Destroy()end)
-local hb=Instance.new("TextButton",ui) hb.Size=UDim2.new(0,48,0,48) hb.Position=UDim2.new(0.5,-24,0,10) hb.BackgroundColor3=Color3.fromRGB(20,25,35) hb.Text="" hb.Visible=false hb.ZIndex=200 S.C(hb,12) 
-local hg=Instance.new("UIGradient",hb) hg.Color=ColorSequence.new(Color3.fromRGB(10,30,90),Color3.fromRGB(80,180,230)) task.spawn(function()while hb.Parent do T:Create(hg,TweenInfo.new(3,Enum.EasingStyle.Linear),{Rotation=360}):Play() task.wait(3)end end)
-local hi=Instance.new("ImageLabel",hb) hi.Size=UDim2.new(1,-4,1,-4) hi.Position=UDim2.new(0,2,0,2) hi.BackgroundTransparency=1 S.C(hi,10) hi.ZIndex=201
-task.spawn(function()pcall(function()local r=game:HttpGet("https://i.ibb.co/6JrKmPvX/Image-1794403359776-336.jpg")if writefile and getcustomasset then writefile("lj_av.png",r)hi.Image=getcustomasset("lj_av.png")end end)end)
-S.B(tp,"−",536,11,32,26,function()m.Visible=false hb.Visible=true end)
-local dg,ds,dp=false,nil,nil
-hb.InputBegan:Connect(function(i)if i.UserInputType==Enum.UserInputType.MouseButton1 or i.UserInputType==Enum.UserInputType.Touch then dg=true ds=i.Position dp=hb.Position end end)
-U.InputChanged:Connect(function(i)if dg and (i.UserInputType==Enum.UserInputType.MouseMovement or i.UserInputType==Enum.UserInputType.Touch)then local d=i.Position-ds hb.Position=UDim2.new(dp.X.Scale,dp.X.Offset+d.X,dp.Y.Scale,dp.Y.Offset+d.Y)end end)
-U.InputEnded:Connect(function(i)if i.UserInputType==Enum.UserInputType.MouseButton1 or i.UserInputType==Enum.UserInputType.Touch then if dg then local d=i.Position-ds if math.abs(d.X)+math.abs(d.Y)<10 then hb.Visible=false m.Visible=true end dg=false end end end)
-local nv=Instance.new("Frame",m)nv.Size=UDim2.new(0,92,0,316)nv.Position=UDim2.new(0,8,0,56)nv.BackgroundTransparency=1 nv.BorderSizePixel=0 nv.ZIndex=8 S.C(nv,8) local nvs=Instance.new("UIStroke",nv)nvs.Color=S.A nvs.Transparency=0.3
-local gl=Instance.new("Frame",m)gl.Size=UDim2.new(0,500,0,316)gl.Position=UDim2.new(0,108,0,56)gl.BackgroundTransparency=1 gl.BorderSizePixel=0 gl.ZIndex=2 S.C(gl,8) local gls=Instance.new("UIStroke",gl)gls.Color=S.A gls.Transparency=0.3
-S.P={} S.N={} for i,n in ipairs({"主页","脚本","公告","曲库","视觉","设置"})do local b=Instance.new("TextButton",nv)b.Size=UDim2.new(0,84,0,38)b.Position=UDim2.new(0,4,0,8+(i-1)*42)b.BackgroundTransparency=1 b.Text=string.format("%02d  %s",i,n)b.TextColor3=(i==1)and S.A or S.D b.Font=(i==1)and Enum.Font.GothamBold or Enum.Font.Gotham b.TextSize=12 b.TextXAlignment=Enum.TextXAlignment.Left b.ZIndex=9 b.TextStrokeTransparency=0 S.N[i]=b local q=Instance.new("Frame",gl)q.Size=UDim2.new(1,0,1,0)q.BackgroundTransparency=1 q.BorderSizePixel=0 q.Visible=(i==1)q.ZIndex=3 S.P[i]=q b.MouseButton1Click:Connect(function()for j=1,6 do S.P[j].Visible=(j==i)end for k=1,6 do S.N[k].TextColor3=(k==i)and S.A or S.D S.N[k].Font=(k==i)and Enum.Font.GothamBold or Enum.Font.Gotham end end)end
-S.L(S.P[1],"SONIC CENTER",150,32,220,20,14,S.A,true) S.L(S.P[1],P.DisplayName.." (@"..P.Name..")",150,54,220,16,12,S.D)
-S.me=Instance.new("ImageLabel",S.P[1]) S.me.Size=UDim2.new(0,100,0,100) S.me.Position=UDim2.new(0,20,0,20) S.me.BackgroundTransparency=1 S.C(S.me,8) S.me.ZIndex=5 S.me.Image="rbxthumb://type=AvatarHeadShot&id="..P.UserId.."&w=150&h=150"
-local c1=Instance.new("Frame",S.P[1]) c1.Size=UDim2.new(0,90,0,70) c1.Position=UDim2.new(0,260,0,20) c1.BackgroundColor3=Color3.fromRGB(30,40,50) c1.BackgroundTransparency=0.6 c1.ZIndex=5 S.C(c1,8) S.L(c1,"帧率",0,8,90,16,10,S.D,false,Enum.TextXAlignment.Center) local fv=S.L(c1,"60 FPS",0,24,90,32,20,S.A,true,Enum.TextXAlignment.Center)
-local c2=Instance.new("Frame",S.P[1]) c2.Size=UDim2.new(0,90,0,70) c2.Position=UDim2.new(0,360,0,20) c2.BackgroundColor3=Color3.fromRGB(30,40,50) c2.BackgroundTransparency=0.6 c2.ZIndex=5 S.C(c2,8) S.L(c2,"延迟",0,8,90,16,10,S.D,false,Enum.TextXAlignment.Center) local pv=S.L(c2,"-- MS",0,24,90,32,20,S.A,true,Enum.TextXAlignment.Center)
-local qqBtn = Instance.new("TextButton", S.P[1]) qqBtn.Size=UDim2.new(0,190,0,28) qqBtn.Position=UDim2.new(0,260,0,100) qqBtn.BackgroundTransparency=0 qqBtn.Text="" qqBtn.ZIndex=20 S.C(qqBtn,6)
-local qqBg = Instance.new("Frame", qqBtn) qqBg.Size=UDim2.new(1,0,1,0) qqBg.BackgroundColor3=S.A qqBg.BorderSizePixel=0 S.C(qqBg,6) qqBg.ZIndex=20
-local qqGrad = Instance.new("UIGradient", qqBg) qqGrad.Color=ColorSequence.new({ColorSequenceKeypoint.new(0,Color3.fromRGB(10,30,90)),ColorSequenceKeypoint.new(0.5,Color3.fromRGB(80,180,230)),ColorSequenceKeypoint.new(1,Color3.fromRGB(10,30,90))}) qqGrad.Offset=Vector2.new(-2,0)
-task.spawn(function()while qqBtn.Parent do T:Create(qqGrad,TweenInfo.new(3,Enum.EasingStyle.Linear),{Offset=Vector2.new(2,0)}):Play() task.wait(3) end end)
-local qqTxt = Instance.new("TextLabel", qqBtn) qqTxt.Size=UDim2.new(1,0,1,0) qqTxt.BackgroundTransparency=1 qqTxt.Text="复制QQ群: 1107284557" qqTxt.TextColor3=S.A qqTxt.Font=Enum.Font.GothamBold qqTxt.TextSize=11 qqTxt.ZIndex=21 qqTxt.TextStrokeTransparency=0
-qqBtn.MouseButton1Click:Connect(function()if setclipboard then setclipboard("1107284557")end end)
-local l1=Instance.new("Frame",S.P[1]) l1.Size=UDim2.new(0,460,0,1) l1.Position=UDim2.new(0,20,0,140) l1.BackgroundColor3=S.A l1.BackgroundTransparency=0.2 l1.ZIndex=5 S.L(S.P[1],"服务器实时数据",20,155,200,18,12,S.A,true)
-local fvls={} for i,t in ipairs{"现实时间","本次游玩","设备内存","已用内存"}do local x=20+(i-1)*115 S.L(S.P[1],t,x,185,100,14,10,S.D) fvls[i]=S.L(S.P[1],"-",x,202,100,18,14,S.A,true) end
-local fr,lT=0,tick() R.RenderStepped:Connect(function()fr=fr+1 local n=tick() if n-lT>=1 then if fv.Parent then fv.Text=tostring(math.floor(fr/(n-lT))).." FPS" end fr,lT=0,n pcall(function() local ok,p=pcall(function()return P:GetNetworkPing()end) if ok and pv.Parent then pv.Text=math.floor(p*1000).." MS" else pv.Text="实时" end end) if fvls[1] and fvls[1].Parent then local ts=os.date("*t") fvls[1].Text=string.format("%02d:%02d:%02d",ts.hour,ts.min,ts.sec) local sec=math.floor(n-ST) fvls[2].Text=string.format("%02d:%02d:%02d",math.floor(sec/3600),math.floor((sec%3600)/60),sec%60) fvls[3].Text="4096 MB" fvls[4].Text=tostring(math.floor(gcinfo())).." MB" end end end)
-for i=2,6 do S.L(S.P[i],"0"..i.." / "..({"","脚本","公告","曲库","视觉","设置"})[i],20,20,300,24,16,S.A,true) end
-S.B(S.P[6],"× 关闭",20,60,140,30,function()ui:Destroy()end)
-print("全真实数据跳动版加载完毕！")
+local P=game:GetService("Players").LocalPlayer local T=game:GetService("TweenService") local U=game:GetService("UserInputService")
+for _,v in ipairs(P.PlayerGui:GetChildren())do if v.Name=="LJ_UI" then v:Destroy()end end
+local function LI(l,u,n) task.spawn(function() pcall(function() local p=n..".png" if isfile and isfile(p) and getcustomasset then l.Image=getcustomasset(p) else local d=game:HttpGet(u) if writefile and getcustomasset then writefile(p,d) l.Image=getcustomasset(p) else l.Image=u end end end) end) end
+
+local sg=Instance.new("ScreenGui",P.PlayerGui) sg.Name="LJ_UI" sg.IgnoreGuiInset=true sg.DisplayOrder=9999
+local m=Instance.new("Frame",sg) m.Size=UDim2.new(0,580,0,340) m.Position=UDim2.new(0.5,0,0.5,0) m.AnchorPoint=Vector2.new(0.5,0.5) m.BackgroundTransparency=1 m.ClipsDescendants=true Instance.new("UICorner",m).CornerRadius=UDim.new(0,12) Instance.new("UIStroke",m).Color=Color3.fromRGB(255,255,255)
+
+local bg=Instance.new("ImageLabel",m) bg.Size=UDim2.new(1,0,1,0) bg.ZIndex=0 bg.BackgroundTransparency=1 bg.ScaleType=Enum.ScaleType.Crop 
+LI(bg,"https://i.ibb.co/99BqWLrL/Image-1794499464220-466.jpg","bg_v5")
+
+local hb=Instance.new("TextButton",sg) hb.Size=UDim2.new(0,50,0,50) hb.Position=UDim2.new(0,20,0,20) hb.BackgroundColor3=Color3.fromRGB(255,255,255) hb.BackgroundTransparency=0.8 hb.Text="" hb.Visible=false hb.ZIndex=200 Instance.new("UICorner",hb).CornerRadius=UDim.new(0,10) Instance.new("UIStroke",hb).Color=Color3.fromRGB(255,255,255)
+local hbi=Instance.new("ImageLabel",hb) hbi.Size=UDim2.new(1,-4,1,-4) hbi.Position=UDim2.new(0,2,0,2) hbi.BackgroundTransparency=1 hbi.ZIndex=201 Instance.new("UICorner",hbi).CornerRadius=UDim.new(0,8) 
+LI(hbi,"https://i.ibb.co/gLb1Bssj/Image-1794499774396-431.png","min_v5")
+hb.MouseButton1Click:Connect(function() hb.Visible=false m.Visible=true m.Size=UDim2.new(0,580,0,0) T:Create(m,TweenInfo.new(0.4,Enum.EasingStyle.Back),{Size=UDim2.new(0,580,0,340)}):Play() end)
+
+local topAv=Instance.new("ImageLabel",m) topAv.Size=UDim2.new(0,40,0,40) topAv.Position=UDim2.new(0,15,0,4) topAv.BackgroundTransparency=1 topAv.ZIndex=5 Instance.new("UICorner",topAv).CornerRadius=UDim.new(0,8) 
+LI(topAv,"https://i.ibb.co/Rk7YXKFc/Image-1794499770219-943.png","top_face_v5")
+
+local t1=Instance.new("TextLabel",m) t1.Size=UDim2.new(0,200,0,22) t1.Position=UDim2.new(0,65,0,6) t1.BackgroundTransparency=1 t1.Text="SONIC SCRIPT" t1.TextColor3=Color3.fromRGB(255,255,255) t1.Font=Enum.Font.Arcade t1.TextSize=16 t1.TextXAlignment=Enum.TextXAlignment.Left t1.ZIndex=5 t1.TextStrokeTransparency=1
+local t2=Instance.new("TextLabel",m) t2.Size=UDim2.new(0,200,0,18) t2.Position=UDim2.new(0,65,0,26) t2.BackgroundTransparency=1 t2.Text="中野三玖 · MIKU" t2.TextColor3=Color3.fromRGB(220,220,220) t2.Font=Enum.Font.GothamBold t2.TextSize=12 t2.TextXAlignment=Enum.TextXAlignment.Left t2.ZIndex=5 t2.TextStrokeTransparency=1
+
+local cb=Instance.new("TextButton",m) cb.Size=UDim2.new(0,26,0,26) cb.Position=UDim2.new(1,-35,0,8) cb.BackgroundColor3=Color3.fromRGB(255,255,255) cb.BackgroundTransparency=0.8 cb.Text="×" cb.TextColor3=Color3.fromRGB(255,255,255) cb.ZIndex=5 Instance.new("UICorner",cb).CornerRadius=UDim.new(0,6) Instance.new("UIStroke",cb).Color=Color3.fromRGB(255,255,255) cb.MouseButton1Click:Connect(function() sg:Destroy()end)
+local mb=Instance.new("TextButton",m) mb.Size=UDim2.new(0,26,0,26) mb.Position=UDim2.new(1,-70,0,8) mb.BackgroundColor3=Color3.fromRGB(255,255,255) mb.BackgroundTransparency=0.8 mb.Text="−" mb.TextColor3=Color3.fromRGB(255,255,255) mb.ZIndex=5 Instance.new("UICorner",mb).CornerRadius=UDim.new(0,6) Instance.new("UIStroke",mb).Color=Color3.fromRGB(255,255,255)
+mb.MouseButton1Click:Connect(function() local tw=T:Create(m,TweenInfo.new(0.3,Enum.EasingStyle.Quad),{Size=UDim2.new(0,580,0,0)}) tw:Play() tw.Completed:Connect(function() m.Visible=false hb.Visible=true m.Size=UDim2.new(0,580,0,340) end) end)
+
+local nav=Instance.new("Frame",m) nav.Size=UDim2.new(0,90,1,-50) nav.Position=UDim2.new(0,10,0,50) nav.BackgroundTransparency=1 nav.ZIndex=5
+local pg={} local bt={}
+for i,name in ipairs({"公告","脚本","曲库","设置"})do 
+    local b=Instance.new("TextButton",nav) b.Size=UDim2.new(1,0,0,36) b.Position=UDim2.new(0,0,0,(i-1)*42) b.BackgroundTransparency=1 b.Text=name b.TextColor3=(i==1)and Color3.new(1,1,1) or Color3.fromRGB(220,220,220) b.Font=Enum.Font.GothamBold b.TextSize=14 b.ZIndex=6 b.TextStrokeTransparency=1
+    local p=Instance.new("Frame",m) p.Size=UDim2.new(0,460,1,-50) p.Position=UDim2.new(0,110,0,50) p.BackgroundTransparency=1 p.Visible=(i==1) p.ZIndex=5 pg[i]=p bt[i]=b
+    b.MouseButton1Click:Connect(function() for k=1,4 do pg[k].Visible=(k==i) bt[k].TextColor3=(k==i)and Color3.new(1,1,1) or Color3.fromRGB(220,220,220) end end)
+end
+
+local p1=pg[1]
+local av=Instance.new("ImageLabel",p1) av.Size=UDim2.new(0,60,0,60) av.Position=UDim2.new(0,10,0,10) av.BackgroundTransparency=1 av.ZIndex=6 Instance.new("UICorner",av).CornerRadius=UDim.new(1,0) 
+LI(av,"https://i.ibb.co/v66wjmJ5/Image-1794149551205-70.jpg","momo_v5")
+local nm=Instance.new("TextLabel",p1) nm.Size=UDim2.new(0,200,0,20) nm.Position=UDim2.new(0,80,0,15) nm.BackgroundTransparency=1 nm.Text="墨 墨" nm.TextColor3=Color3.new(1,1,1) nm.Font=Enum.Font.GothamBold nm.TextSize=18 nm.TextXAlignment=Enum.TextXAlignment.Left nm.ZIndex=6 nm.TextStrokeTransparency=1
+local tt=Instance.new("TextLabel",p1) tt.Size=UDim2.new(0,200,0,16) tt.Position=UDim2.new(0,80,0,38) tt.BackgroundTransparency=1 tt.Text="SONIC 核心成员" tt.TextColor3=Color3.fromRGB(142,240,255) tt.Font=Enum.Font.GothamBold tt.TextSize=12 tt.TextXAlignment=Enum.TextXAlignment.Left tt.ZIndex=6 tt.TextStrokeTransparency=1
+local ann=Instance.new("TextLabel",p1) ann.Size=UDim2.new(1,-20,1,-80) ann.Position=UDim2.new(0,10,0,80) ann.BackgroundTransparency=1 ann.Text="【 墨墨的专属建议 】\n\n1. 界面已去除冗余功能，纯白边框配折叠动画。\n2. 墨墨说：「先见其面，再入其中」\n3. 必须听从墨水墨墨的建议，他敢做敢当，这是他的建议！\n4. 祝大家在游戏中玩得愉快！" ann.TextColor3=Color3.new(1,1,1) ann.Font=Enum.Font.GothamBold ann.TextSize=15 ann.TextXAlignment=Enum.TextXAlignment.Left ann.TextYAlignment=Enum.TextYAlignment.Top ann.ZIndex=6 ann.TextStrokeTransparency=1
+
+local sp=pg[2] local sn=Instance.new("Frame",sp) sn.Size=UDim2.new(1,0,0,30) sn.BackgroundTransparency=1 sn.ZIndex=6
+local subP={} local subB={}
+for i, sN in ipairs({"飞车", "缝合"}) do
+    local sb=Instance.new("TextButton",sn) sb.Size=UDim2.new(0,60,0,26) sb.Position=UDim2.new(0,(i-1)*65,0,0) sb.BackgroundColor3=Color3.fromRGB(255,255,255) sb.BackgroundTransparency=(i==1) and 0.2 or 0.7 sb.Text=sN sb.TextColor3=Color3.new(1,1,1) sb.Font=Enum.Font.GothamBold sb.TextSize=12 sb.ZIndex=7 sb.TextStrokeTransparency=1 Instance.new("UICorner",sb).CornerRadius=UDim.new(0,4) subB[i]=sb
+    local spr=Instance.new("Frame",sp) spr.Size=UDim2.new(1,0,1,-40) spr.Position=UDim2.new(0,0,0,40) spr.BackgroundTransparency=1 spr.Visible=(i==1) spr.ZIndex=6 subP[i]=spr
+    sb.MouseButton1Click:Connect(function() for k=1,2 do subP[k].Visible=(k==i) subB[k].BackgroundTransparency=(k==i) and 0.2 or 0.7 end end)
+end
+
+local fb=Instance.new("TextButton",subP[1]) 
+fb.Size=UDim2.new(0,150,0,36) fb.Position=UDim2.new(0,0,0,15) 
+fb.BackgroundColor3=Color3.fromRGB(255,255,255) fb.BackgroundTransparency=0.8 
+fb.Text="启动 飞车" fb.TextColor3=Color3.fromRGB(255,255,255) fb.Font=Enum.Font.GothamBold fb.TextSize=13 fb.ZIndex=7 fb.TextStrokeTransparency=1
+Instance.new("UICorner",fb).CornerRadius=UDim.new(0,18) 
+local fs=Instance.new("UIStroke",fb) fs.Color=Color3.fromRGB(255,255,255) fs.Thickness=1.5 fs.Transparency=0.4
+
+fb.MouseButton1Click:Connect(function() 
+    fb.Text="正在启动..." 
+    T:Create(fb,TweenInfo.new(0.2),{BackgroundTransparency=0.2}):Play() 
+    task.wait(0.2) 
+    pcall(function() loadstring(game:HttpGet("https://raw.githubusercontent.com/136289Mm/fA./main/1.lua"))() end) 
+    T:Create(fb,TweenInfo.new(0.2),{BackgroundTransparency=0.8}):Play() 
+    fb.Text="启动 飞车" 
+end)
+
+local st=Instance.new("TextLabel",subP[2]) st.Size=UDim2.new(1,0,1,0) st.BackgroundTransparency=1 st.Text="这里是【缝合】脚本区\n(放入你缝合的代码)" st.TextColor3=Color3.new(1,1,1) st.Font=Enum.Font.GothamBold st.TextSize=14 st.TextStrokeTransparency=1 st.ZIndex=7
+
+local function drag(fr,grip) local d,s,p gripp.InputBegan:Connect(function(i) if i.UserInputType==Enum.UserInputType.MouseButton1 or i.UserInputType==Enum.UserInputType.Touch then d=true s=i.Position p=fr.Position end end) U.InputChanged:Connect(function(i) if d and (i.UserInputType==Enum.UserInputType.MouseMovement or i.UserInputType==Enum.UserInputType.Touch) then local del=i.Position-s fr.Position=UDim2.new(p.X.Scale,p.X.Offset+del.X,p.Y.Scale,p.Y.Offset+del.Y) end end) U.InputEnded:Connect(function(i) if i.UserInputType==Enum.UserInputType.MouseButton1 or i.UserInputType==Enum.UserInputType.Touch then d=false end end) end
+drag(m,t1) drag(hb,hb)
